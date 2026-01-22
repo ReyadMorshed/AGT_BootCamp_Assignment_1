@@ -15,7 +15,4 @@ export class DashboardPage extends BasePage {
   get timeAtWorkText(): Locator {
     return this.page.getByText("Time at Work");
   }
-  async navigateToLeave(): Promise<void> {
-    await this.LeaveLink.click();
-  }
 }

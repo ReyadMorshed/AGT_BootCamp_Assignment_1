@@ -18,9 +18,4 @@ export class LoginPage extends BasePage {
   get loginButton(): Locator {
     return this.page.getByRole("button", { name: "Login" });
   }
-  async login(username: string, password: string): Promise<void> {
-    await this.usernameField.fill(username);
-    await this.passwordField.fill(password);
-    await this.loginButton.click();
-  }
 }

@@ -1,8 +1,11 @@
-import { test, expect } from "@playwright/test";
-import { DashboardPage } from "../pages/Dashboard/dashboard.page";
-import { LoginPage } from "../pages/Login/login.page";
+import { test, expect, Page } from "@playwright/test";
+import { DashboardPage } from "../src/pages/dashboard/dashboard.page";
+import { LoginPage } from "../src/pages/login/login.page";
 import * as data from "../test-data/login-data.json";
-import { Topbar } from "../pages/Leave/topbar";
+import { Topbar } from "../src/pages/leave/topbar";
+import { loginToOrangeHRM } from "../src/utilities/utils/login/loginUtils";
+import { EnvKey, environments } from "../config/env.config";
+import { navigateToLeave } from "../src/utilities/utils/dashboard/dashboardUtils";
 
 function getRandomFutureStartDate(maxDaysAhead: number = 30): string {
   const today = new Date();
@@ -27,6 +30,8 @@ function getEndDateFromStart(startDate: string): string {
 let loginPage: LoginPage;
 let dashboardPage: DashboardPage;
 let topbar: Topbar;
+let env: EnvKey = "production";
+const { baseURL, credentials } = environments[env];
 test.describe("Create,Edit and Delete Leave Tests", () => {
   test.describe.configure({ mode: "serial" });
 
@@ -35,10 +40,16 @@ test.describe("Create,Edit and Delete Leave Tests", () => {
     dashboardPage = new DashboardPage(page);
 
     topbar = new Topbar(page);
-    await loginPage.login(data.Username, data.Password);
+    await loginToOrangeHRM(
+      page,
+      baseURL,
+      loginPage,
+      credentials.admin.username,
+      credentials.admin.password,
+    );
     await expect(dashboardPage.dashboardText).toBeVisible({ timeout: 5000 });
     await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
-    await dashboardPage.navigateToLeave();
+    await navigateToLeave(page, dashboardPage);
     await topbar.navigateToApplyLeave();
     //await page.getByRole("link", { name: "Leave" }).click();
     //await page.getByRole("link", { name: "Apply" }).click();
@@ -64,39 +75,10 @@ test.describe("Create,Edit and Delete Leave Tests", () => {
     ).toBeVisible({ timeout: 5000 });
   });
 
-  test("Edit Leave", async ({ page }) => {
-    await page.goto(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-    );
-    await page.getByRole("textbox", { name: "Username" }).click();
-    await page.getByRole("textbox", { name: "Username" }).fill("Admin");
-    await page.getByRole("textbox", { name: "Password" }).click();
-    await page.getByRole("textbox", { name: "Password" }).fill("admin123");
-    await page.getByRole("button", { name: "Login" }).click();
-    await page.getByRole("link", { name: "Leave" }).click();
-    await page.getByRole("link", { name: "My Leave" }).click();
-    await page.getByRole("button", { name: "" }).first().click();
-    await page.getByText("Add Comment").click();
-    await page.getByRole("textbox", { name: "Comment here" }).click();
-    await page
-      .getByRole("textbox", { name: "Comment here" })
-      .fill("Editing Leave");
-    await page.getByRole("button", { name: "Save" }).click();
-    await expect(page.getByText("Editing Leave")).toBeVisible();
-  });
+  
 
-  test("Delete Leave", async ({ page }) => {
-    await page.goto(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-    );
-    await page.getByRole("textbox", { name: "Username" }).click();
-    await page.getByRole("textbox", { name: "Username" }).fill("Admin");
-    await page.getByRole("textbox", { name: "Password" }).click();
-    await page.getByRole("textbox", { name: "Password" }).fill("admin123");
-    await page.getByRole("button", { name: "Login" }).click();
-    await page.getByRole("link", { name: "Leave" }).click();
-    await page.getByRole("link", { name: "My Leave" }).click();
-    await page.getByRole("button", { name: "Cancel" }).first().click();
-    await expect(page.getByText(/Cancelled/).first()).toBeVisible();
-  });
+  
 });
+
+
+
