@@ -10,7 +10,4 @@ export class Topbar extends BasePage {
   get applyLeaveLink(): Locator {
     return this.page.getByRole("link", { name: "Apply" });
   }
-  async navigateToApplyLeave(): Promise<void> {
-    await this.applyLeaveLink.click();
-  }
 }

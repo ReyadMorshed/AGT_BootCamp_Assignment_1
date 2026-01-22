@@ -19,12 +19,12 @@ export class ApplyLeavePage extends BasePage {
   get calenderEndDate(): Locator {
     return this.page.getByRole("textbox", { name: "yyyy-dd-mm" }).nth(1);
   }
-  async clickOnSelectDropdown(): Promise<void> {
-    await this.selectDropdown.click();
-  }
-  async clickOnLeaveType(): Promise<void> {
-    await this.leaveType.click();
-  }
+  // async clickOnSelectDropdown(): Promise<void> {
+  //   await this.selectDropdown.click();
+  // }
+  // async clickOnLeaveType(): Promise<void> {
+  //   await this.leaveType.click();
+  // }
   async insertStartDate(): Promise<void> {
     await this.calenderStartDate.click();
     await this.calenderStartDate.fill("");

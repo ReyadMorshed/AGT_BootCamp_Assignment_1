@@ -1,11 +1,9 @@
 import { expect } from "@playwright/test";
 import { test } from "../src/fixture/fixtures";
 import { LoginPage } from "../src/pages/login/login.page";
-import * as data from "../test-data/login-data.json";
-import { DashboardPage } from "../src/pages/dashboard/dashboard.page";
 import { environments, EnvKey } from "../config/env.config";
 import { loginToOrangeHRM } from "../src/utilities/utils/login/loginUtils";
-import { waitForVisible } from "../src/utilities/actions/elementActions";
+import { DashboardPage } from "../src/pages/Dashboard/dashboard.page";
 
 let loginPage: LoginPage;
 let dashboardPage: DashboardPage;

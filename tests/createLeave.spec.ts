@@ -1,11 +1,13 @@
 import { test, expect, Page } from "@playwright/test";
-import { DashboardPage } from "../src/pages/dashboard/dashboard.page";
 import { LoginPage } from "../src/pages/login/login.page";
-import * as data from "../test-data/login-data.json";
-import { Topbar } from "../src/pages/leave/topbar";
+import { Topbar } from "../src/pages/leave/topbar.page";
 import { loginToOrangeHRM } from "../src/utilities/utils/login/loginUtils";
 import { EnvKey, environments } from "../config/env.config";
 import { navigateToLeave } from "../src/utilities/utils/dashboard/dashboardUtils";
+import { DashboardPage } from "../src/pages/Dashboard/dashboard.page";
+import { navigateToApplyLeave } from "../src/utilities/utils/leave/topBar";
+import { ApplyLeavePage } from "../src/pages/leave/applyLeave.page";
+import { clickOnSelectDropdown,clickOnLeaveType } from "../src/utilities/utils/leave/applyLeave";
 
 function getRandomFutureStartDate(maxDaysAhead: number = 30): string {
   const today = new Date();
@@ -30,6 +32,7 @@ function getEndDateFromStart(startDate: string): string {
 let loginPage: LoginPage;
 let dashboardPage: DashboardPage;
 let topbar: Topbar;
+let applyLeavePage: ApplyLeavePage;
 let env: EnvKey = "production";
 const { baseURL, credentials } = environments[env];
 test.describe("Create,Edit and Delete Leave Tests", () => {
@@ -38,6 +41,8 @@ test.describe("Create,Edit and Delete Leave Tests", () => {
   test("create leave", async ({ page }) => {
     loginPage = new LoginPage(page);
     dashboardPage = new DashboardPage(page);
+    topbar = new Topbar(page);
+    applyLeavePage = new ApplyLeavePage(page);
 
     topbar = new Topbar(page);
     await loginToOrangeHRM(
@@ -50,11 +55,13 @@ test.describe("Create,Edit and Delete Leave Tests", () => {
     await expect(dashboardPage.dashboardText).toBeVisible({ timeout: 5000 });
     await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
     await navigateToLeave(page, dashboardPage);
-    await topbar.navigateToApplyLeave();
+    await navigateToApplyLeave(page, topbar);
+    await clickOnSelectDropdown(page, applyLeavePage);
+    await clickOnLeaveType(page, applyLeavePage);
     //await page.getByRole("link", { name: "Leave" }).click();
     //await page.getByRole("link", { name: "Apply" }).click();
     //await page.getByText("-- Select --").first().click();
-    await page.getByText("CAN - Personal").click();
+    //await page.getByText("CAN - Personal").click();
     await page.getByRole("textbox", { name: "yyyy-dd-mm" }).first().click();
     await page.getByRole("textbox", { name: "yyyy-dd-mm" }).first().fill("");
     const nextDay: string = getRandomFutureStartDate(30);
@@ -74,11 +81,4 @@ test.describe("Create,Edit and Delete Leave Tests", () => {
       page.getByText("Successfully Saved", { exact: true }),
     ).toBeVisible({ timeout: 5000 });
   });
-
-  
-
-  
 });
-
-
-

@@ -1,19 +1,24 @@
+import { Page, Locator, expect } from "@playwright/test";
+
 /**
  * Waits for a locator to be visible before interacting.
  * @param locator - The Playwright Locator to wait for.
  * @param description - Description of the element for logging.
  * @param timeout - Optional timeout in ms (default 10s)
  */
-export async function waitForVisible(locator: Locator, description: string, timeout = 10000): Promise<void> {
+export async function waitForVisible(
+  locator: Locator,
+  description: string,
+  timeout = 10000,
+): Promise<void> {
   try {
-    await locator.waitFor({ state: 'visible', timeout });
+    await locator.waitFor({ state: "visible", timeout });
     console.log(`SUCCESS: ${description} is visible`);
   } catch (error) {
     console.error(`FAILURE: ${description} not visible in time.`, error);
     throw error;
   }
 }
-import { Page, Locator } from '@playwright/test';
 
 /**
  * Clicks on a locator with logging, error handling, and screenshot on failure.
@@ -21,7 +26,11 @@ import { Page, Locator } from '@playwright/test';
  * @param description - Description of the action for logging.
  * @param page - The Playwright Page instance for screenshot on error.
  */
-export async function performClick(locator: Locator, description: string, page: Page): Promise<void> {
+export async function performClick(
+  locator: Locator,
+  description: string,
+  page: Page,
+): Promise<void> {
   try {
     await locator.click();
     console.log(`SUCCESS: Clicked on ${description}`);
@@ -39,7 +48,12 @@ export async function performClick(locator: Locator, description: string, page: 
  * @param description - Description of the action for logging.
  * @param page - The Playwright Page instance for screenshot on error.
  */
-export async function performFill(locator: Locator, value: string, description: string, page: Page): Promise<void> {
+export async function performFill(
+  locator: Locator,
+  value: string,
+  description: string,
+  page: Page,
+): Promise<void> {
   try {
     await locator.fill(value);
     console.log(`SUCCESS: Filled ${description} with value '${value}'`);
@@ -56,13 +70,36 @@ export async function performFill(locator: Locator, value: string, description: 
  * @param url - The URL to navigate to.
  * @param description - Description of the navigation for logging.
  */
-export async function performGoto(page: Page, url: string, description: string): Promise<void> {
+export async function performGoto(
+  page: Page,
+  url: string,
+  description: string,
+): Promise<void> {
   try {
     await page.goto(url);
     console.log(`SUCCESS: Navigated to ${description} (${url})`);
   } catch (error) {
-    console.error(`FAILURE: Could not navigate to ${description} (${url}). Error:`, error);
+    console.error(
+      `FAILURE: Could not navigate to ${description} (${url}). Error:`,
+      error,
+    );
     await page.screenshot({ path: `error-goto-${Date.now()}.png` });
     throw error;
   }
+}
+
+/**
+ * Validate that a toast message is visible within the given timeout.
+ * @param page Playwright Page object
+ * @param message The exact toast text to validate
+ * @param timeout Timeout in ms (default: 5000)
+ */
+export async function validateToastMessage(
+  page: Page,
+  message: string,
+  timeout: number = 5000,
+): Promise<void> {
+  await expect(page.getByText(message, { exact: true })).toBeVisible({
+    timeout,
+  });
 }
