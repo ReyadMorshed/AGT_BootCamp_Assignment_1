@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
-import { DashboardPage } from "../../../pages/dashboard/dashboard.page";
 import { performClick } from "../../actions/elementActions";
+import { DashboardPage } from "../../../pages/Dashboard/dashboard.page";
 
 export async function navigateToLeave(
   page: Page,
