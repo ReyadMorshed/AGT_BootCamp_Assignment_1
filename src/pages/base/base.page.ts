@@ -8,4 +8,7 @@ export class BasePage {
   get LeaveLink(): Locator {
     return this.page.getByRole("link", { name: "Leave" });
   }
+  get applyButton(): Locator {
+    return this.page.getByRole("button", { name: "Apply" });
+  }
 }

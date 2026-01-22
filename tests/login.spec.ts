@@ -1,25 +1,10 @@
 import { expect } from "@playwright/test";
-import { test } from "../src/fixture/fixtures";
-import { LoginPage } from "../src/pages/login/login.page";
-import { environments, EnvKey } from "../config/env.config";
-import { loginToOrangeHRM } from "../src/utilities/utils/login/loginUtils";
+import { test } from "../src/fixture/sessionLogin"; // <-- Use the custom test
 import { DashboardPage } from "../src/pages/Dashboard/dashboard.page";
 
-let loginPage: LoginPage;
-let dashboardPage: DashboardPage;
-let env: EnvKey = "production";
-const { baseURL, credentials } = environments[env];
 test.describe("OrangeHRM Login Tests", () => {
-  test("login using POM", async ({ page }) => {
-    loginPage = new LoginPage(page);
-    dashboardPage = new DashboardPage(page);
-    await loginToOrangeHRM(
-      page,
-      baseURL,
-      loginPage,
-      credentials.admin.username,
-      credentials.admin.password,
-    );
+  test("login using sessionLogin fixture", async ({ loggedInPage }) => {
+    const dashboardPage = new DashboardPage(loggedInPage);
     await expect(dashboardPage.dashboardText).toBeVisible({ timeout: 5000 });
     await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
   });
