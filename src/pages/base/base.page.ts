@@ -11,4 +11,7 @@ export class BasePage {
   get applyButton(): Locator {
     return this.page.getByRole("button", { name: "Apply" });
   }
+  get saveButton(): Locator {
+    return this.page.getByRole("button", { name: "Save" });
+  }
 }

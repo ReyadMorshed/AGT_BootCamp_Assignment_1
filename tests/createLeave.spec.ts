@@ -9,7 +9,6 @@ import {
   clickOnSelectDropdown,
   clickOnLeaveType,
   insertDates,
-  clickOnApplyBtn,
 } from "../src/utilities/utils/leave/applyLeave";
 import { validateToastMessage } from "../src/utilities/actions/elementActions";
 import { createLeave } from "../src/utilities/setupFunctions/createLeaveFunc";
@@ -17,8 +16,8 @@ import { createLeave } from "../src/utilities/setupFunctions/createLeaveFunc";
 test.describe("Create,Edit and Delete Leave Tests", () => {
   test.describe.configure({ mode: "serial" });
 
-  // 
+  //
   test("Create Leave", async ({ loggedInPage }) => {
     await createLeave(loggedInPage);
-  })
+  });
 });

@@ -7,17 +7,18 @@ type SessionFixtures = {
   loggedInPage: Page;
 };
 
-/**
- * Custom test fixture that provides a logged-in Playwright Page.
- */
 export const test = base.extend<SessionFixtures>({
   loggedInPage: async ({ page }, use) => {
+    // Get environment from process.env.ENV, default to 'production'
+    const env: EnvKey = (process.env.ENV as EnvKey) || "production";
+    const config = environments[env];
+
     await loginToOrangeHRM(
       page,
-      environments["production"].baseURL,
+      config.baseURL,
       new LoginPage(page),
-      environments["production"].credentials.admin.username,
-      environments["production"].credentials.admin.password,
+      config.credentials.admin.username,
+      config.credentials.admin.password,
     );
     await use(page);
     await page.close();

@@ -20,9 +20,9 @@ export const environments: Record<
     },
   },
   staging: {
-    baseURL: "https://staging.orangehrmlive.com/web/index.php/auth/login",
+    baseURL: "http://localhost/orangehrm-5.8/web/index.php",
     credentials: {
-      admin: { username: "Admin", password: "admin123" },
+      admin: { username: "Reyad", password: "Reyad@123" },
     },
   },
 };

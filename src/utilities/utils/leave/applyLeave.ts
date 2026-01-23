@@ -19,12 +19,7 @@ export async function clickOnLeaveType(
   await performClick(applyLeavePage.leaveType, "Leave Type", page);
 }
 
-export async function clickOnApplyBtn(
-  page: Page,
-  applyLeavePage: ApplyLeavePage,
-): Promise<void> {
-  await performClick(applyLeavePage.applyButton, "Apply Button", page);
-}
+
 export async function insertDates(
   page: Page,
   applyLeavePage: ApplyLeavePage,
