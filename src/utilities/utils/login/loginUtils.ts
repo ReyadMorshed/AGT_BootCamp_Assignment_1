@@ -22,7 +22,7 @@ export async function loginToOrangeHRM(
 ): Promise<void> {
   loginPage = new LoginPage(page);
   await performGoto(page, url, "OrangeHRM Login Page");
-  await page.waitForTimeout(2000); // Wait for 2 seconds to ensure page is fully loaded
+  await page.waitForTimeout(2000); // Wait for 30 seconds to ensure page is fully loaded
   await performFill(loginPage.usernameField, username, "Username field", page);
   await performFill(loginPage.passwordField, password, "Password field", page);
   await performClick(loginPage.loginButton, "Login button", page);

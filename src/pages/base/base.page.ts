@@ -14,4 +14,7 @@ export class BasePage {
   get saveButton(): Locator {
     return this.page.getByRole("button", { name: "Save" });
   }
+  get cancelButton(): Locator {
+    return this.page.getByRole("button", { name: "Cancel" });
+  }
 }

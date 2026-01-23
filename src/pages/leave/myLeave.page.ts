@@ -19,4 +19,7 @@ export class MyLeavePage extends BasePage {
   get commentBox(): Locator {
     return this.page.getByRole("textbox", { name: "Comment here" });
   }
+  get cancelText(): Locator {
+    return this.page.getByText(/Cancelled/).first();
+  }
 }

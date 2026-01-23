@@ -14,9 +14,12 @@ import {
 } from "../utils/leave/applyLeave";
 import { navigateToApplyLeave } from "../utils/leave/topBar";
 import { test } from "../../fixture/sessionLogin";
+
+import { BasePage } from "../../pages/Base/base.page";
 import { clickOnApplyBtn } from "../actions/baseActions";
 
 export async function createLeave(loggedInPage: Page) {
+  const basePage = new BasePage(loggedInPage);
   const dashboardPage = new DashboardPage(loggedInPage);
   const topbar = new Topbar(loggedInPage);
   const applyLeavePage = new ApplyLeavePage(loggedInPage);
@@ -34,7 +37,7 @@ export async function createLeave(loggedInPage: Page) {
     5000,
   );
   await insertDates(loggedInPage, applyLeavePage);
-  await clickOnApplyBtn(loggedInPage, applyLeavePage);
+  await clickOnApplyBtn(loggedInPage, basePage);
 
   await validateToastMessage(loggedInPage, "Successfully Saved", 5000);
 }
