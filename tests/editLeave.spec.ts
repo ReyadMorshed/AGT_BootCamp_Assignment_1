@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../src/fixture/sessionLogin";
-import { createLeave } from "../src/utilities/setupFunctions/createLeaveFunc";
+import { createLeave } from "../src/pages/setupFunctions/createLeaveFunc";
 import {
   addCommentToLeave,
   clickOnMyLeaveLink,
@@ -11,7 +11,7 @@ import { clickOnSaveButton } from "../src/utilities/actions/baseActions";
 
 let myLeavePage: MyLeavePage;
 test.describe("Edit Leave Tests", () => {
-  test("Create Leave", async ({ loggedInPage }) => {
+  test("Edit Leave", async ({ loggedInPage }) => {
     await createLeave(loggedInPage);
     const basePage = new MyLeavePage(loggedInPage);
     const myLeavePage = new MyLeavePage(loggedInPage);

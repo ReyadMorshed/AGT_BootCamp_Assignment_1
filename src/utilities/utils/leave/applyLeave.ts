@@ -1,10 +1,11 @@
 import { Page, Locator } from "@playwright/test";
 import { performClick, performFill } from "../../actions/elementActions";
 import { ApplyLeavePage } from "../../../pages/leave/applyLeave.page";
+
 import {
   getEndDateFromStart,
   getTomorrowStartDate,
-} from "../../setupFunctions/dateGenerator";
+} from "../../../pages/setupFunctions/dateGenerator";
 
 export async function clickOnSelectDropdown(
   page: Page,
@@ -18,7 +19,6 @@ export async function clickOnLeaveType(
 ): Promise<void> {
   await performClick(applyLeavePage.leaveType, "Leave Type", page);
 }
-
 
 export async function insertDates(
   page: Page,
