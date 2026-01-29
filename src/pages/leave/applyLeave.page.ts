@@ -14,26 +14,9 @@ export class ApplyLeavePage extends BasePage {
     return this.page.getByText("CAN - Personal");
   }
   get calenderStartDate(): Locator {
-    return this.page.getByRole("textbox", { name: "yyyy-dd-mm" }).first();
+    return this.page.getByRole("textbox", { name: "yyyy-mm-dd" }).first();
   }
   get calenderEndDate(): Locator {
-    return this.page.getByRole("textbox", { name: "yyyy-dd-mm" }).nth(1);
+    return this.page.getByRole("textbox", { name: "yyyy-mm-dd" }).nth(1);
   }
-  
-  // async clickOnSelectDropdown(): Promise<void> {
-  //   await this.selectDropdown.click();
-  // }
-  // async clickOnLeaveType(): Promise<void> {
-  //   await this.leaveType.click();
-  // }
-  // async insertStartDate(): Promise<void> {
-  //   await this.calenderStartDate.click();
-  //   await this.calenderStartDate.fill("");
-  //   //logic is not completed here
-  // }
-  // async insertEndDate(): Promise<void> {
-  //   await this.calenderEndDate.click();
-  //   await this.calenderEndDate.fill("");
-  //   //logic is not completed here
-  // }
 }

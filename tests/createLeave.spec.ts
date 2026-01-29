@@ -13,7 +13,7 @@ import {
 import { validateToastMessage } from "../src/utilities/actions/elementActions";
 import { createLeave } from "../src/pages/setupFunctions/createLeaveFunc";
 
-test.describe("Create,Edit and Delete Leave Tests", () => {
+test.describe("Create Leave Tests", () => {
   //test.describe.configure({ mode: "serial" });
 
   //

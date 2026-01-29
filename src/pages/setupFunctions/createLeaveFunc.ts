@@ -28,15 +28,19 @@ export async function createLeave(loggedInPage: Page) {
   await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
 
   await navigateToLeave(loggedInPage, dashboardPage);
+  await waitForVisible(topbar.applyLeaveLink, "Apply Leave Link", 5000);
   await navigateToApplyLeave(loggedInPage, topbar);
+  await waitForVisible(applyLeavePage.selectDropdown, "Select Dropdown", 5000);
   await clickOnSelectDropdown(loggedInPage, applyLeavePage);
+  await waitForVisible(applyLeavePage.leaveType, "Leave Type", 5000);
   await clickOnLeaveType(loggedInPage, applyLeavePage);
   await waitForVisible(
     applyLeavePage.calenderStartDate,
     "Calendar Start Date",
-    5000,
+    10000,
   );
   await insertDates(loggedInPage, applyLeavePage);
+  await waitForVisible(basePage.applyButton, "Apply Button", 5000);
   await clickOnApplyBtn(loggedInPage, basePage);
 
   await validateToastMessage(loggedInPage, "Successfully Saved", 5000);
