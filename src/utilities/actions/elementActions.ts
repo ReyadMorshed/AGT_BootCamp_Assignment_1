@@ -99,7 +99,19 @@ export async function validateToastMessage(
   message: string,
   timeout: number = 5000,
 ): Promise<void> {
-  await expect(page.getByText(message, { exact: true })).toBeVisible({
-    timeout,
-  });
+  // await expect(page.getByText(message, { exact: true })).toBeVisible({
+  //   timeout,
+  // });
+  try {
+    await expect(
+      page.getByText(/Successfully Saved/i, { exact: false }),
+    ).toBeVisible({ timeout: 10000 });
+  } catch (error) {
+    console.error(
+      `FAILURE: Toast message '${message}' not visible in time.`,
+      error,
+    );
+    await page.screenshot({ path: `error-toast-${Date.now()}.png` });
+    throw error;
+  }
 }

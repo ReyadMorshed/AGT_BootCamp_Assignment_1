@@ -20,6 +20,8 @@ test.describe("Edit Leave Tests", () => {
     await addCommentToLeave(loggedInPage, myLeavePage);
     await clickOnSaveButton(loggedInPage, basePage);
 
-    await expect(loggedInPage.getByText("Editing Leave")).toBeVisible();
+    await expect(loggedInPage.getByText("Editing Leave").first()).toBeVisible({
+      timeout: 5000,
+    });
   });
 });
