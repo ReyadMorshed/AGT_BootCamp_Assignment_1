@@ -25,3 +25,11 @@ export async function clickOnCancelButton(
   // Implementation goes here
   await performClick(basePage.cancelButton.first(), "Cancel Button", page);
 }
+
+export async function clickOnAddButton(
+  page: Page,
+  basePage: BasePage,
+): Promise<void> {
+  // Implementation goes here
+  await performClick(basePage.addButton, "Add Button", page);
+}

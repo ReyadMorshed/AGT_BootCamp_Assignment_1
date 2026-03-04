@@ -1,13 +1,13 @@
 import { expect } from "@playwright/test";
-import { test } from "../src/fixture/sessionLogin";
-import { createLeave } from "../src/pages/setupFunctions/createLeaveFunc";
+import { test } from "../../src/fixture/sessionLogin";
+import { createLeave } from "../../src/pages/setupFunctions/createLeaveFunc";
 import {
   addCommentToLeave,
   clickOnMyLeaveLink,
   clickOnNewlyCreatedLeave,
-} from "../src/utilities/utils/leave/editLeave";
-import { MyLeavePage } from "../src/pages/leave/myLeave.page";
-import { clickOnSaveButton } from "../src/utilities/actions/baseActions";
+} from "../../src/utilities/utils/leave/editLeave";
+import { MyLeavePage } from "../../src/pages/leave/myLeave.page";
+import { clickOnSaveButton } from "../../src/utilities/actions/baseActions";
 
 let myLeavePage: MyLeavePage;
 test.describe("Edit Leave Tests", () => {

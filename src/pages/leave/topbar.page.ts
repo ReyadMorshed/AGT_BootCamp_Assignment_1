@@ -10,4 +10,11 @@ export class Topbar extends BasePage {
   get applyLeaveLink(): Locator {
     return this.page.getByRole("link", { name: "Apply" });
   }
+
+  get configureLink(): Locator {
+    return this.page.getByText("Configure", { exact: true });
+  }
+  get LeaveTypeMenu(): Locator {
+    return this.page.getByRole("menuitem", { name: /Leave Types/i });
+  }
 }
