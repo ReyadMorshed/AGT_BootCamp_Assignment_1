@@ -10,13 +10,22 @@ import {
   navigateToConfigure,
   navigateToLeaveType,
 } from "../../utilities/utils/leave/topBar";
-import { createNewLeaveType } from "../../utilities/utils/leaveType/leaveTypeUtil";
+import {
+  createNewLeaveType,
+  leaveTypeText,
+} from "../../utilities/utils/leaveType/leaveTypeUtil";
+import {
+  validatePartialPresenceOfText,
+  validateToastMessage,
+} from "../../utilities/actions/elementActions";
+import { LeaveTypePage } from "../leave/leaveType.page";
 
 export async function createLeaveType(loggedInPage: Page) {
   const basePage = new BasePage(loggedInPage);
   const dashboardPage = new DashboardPage(loggedInPage);
   const topbar = new Topbar(loggedInPage);
   const configureLeaveTypePage = new ConfigureLeaveTypePage(loggedInPage);
+  const leaveTypePage = new LeaveTypePage(loggedInPage);
 
   await expect(dashboardPage.dashboardText).toBeVisible({ timeout: 5000 });
   await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
@@ -29,4 +38,10 @@ export async function createLeaveType(loggedInPage: Page) {
   });
 
   await createNewLeaveType(loggedInPage, configureLeaveTypePage);
+  await validatePartialPresenceOfText(
+    leaveTypePage.leaveTypeText,
+    leaveTypeText,
+    "Leave Type Text",
+    5000,
+  );
 }

@@ -115,3 +115,42 @@ export async function validateToastMessage(
     throw error;
   }
 }
+
+export async function validateElementText(
+  locator: Locator,
+  expectedText: string,
+  description: string,
+  timeout: number = 10000,
+): Promise<void> {
+  try {
+    await expect(locator).toHaveText(expectedText, { timeout });
+    console.log(`SUCCESS: ${description} has expected text '${expectedText}'`);
+  } catch (error) {
+    console.error(
+      `FAILURE: ${description} does not have expected text '${expectedText}'.`,
+      error,
+    );
+    throw error;
+  }
+}
+
+export async function validatePartialPresenceOfText(
+  locator: Locator,
+  expectedText: string,
+  description: string,
+  timeout: number = 10000,
+): Promise<void> {
+  try {
+    // Replaced .toHaveText(new RegExp(...)) with .toContainText(...)
+    await expect(locator).toContainText(expectedText, { timeout });
+    console.log(
+      `SUCCESS: ${description} contains expected text '${expectedText}'`,
+    );
+  } catch (error) {
+    console.error(
+      `FAILURE: ${description} does not contain expected text '${expectedText}'.`,
+      error,
+    );
+    throw error;
+  }
+}

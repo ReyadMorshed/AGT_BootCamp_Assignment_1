@@ -4,6 +4,8 @@ import { performClick, performFill } from "../../actions/elementActions";
 import { ConfigureLeaveTypePage } from "../../../pages/leave/configureLeaveType.page";
 import { clickOnSaveButton } from "../../actions/baseActions";
 
+export const leaveTypeText = `Test Leave Type_${Date.now()}`;
+
 export async function createNewLeaveType(
   page: Page,
   configureLeaveType: ConfigureLeaveTypePage,
@@ -18,7 +20,7 @@ export async function createNewLeaveType(
   );
   await performFill(
     configureLeaveType.leaveTypeNameInput,
-    "Test Leave Type",
+    leaveTypeText,
     "Leave Type Name Input",
     page,
   );
