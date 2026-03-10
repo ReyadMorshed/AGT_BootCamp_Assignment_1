@@ -21,4 +21,10 @@ export class BasePage {
   get addButton(): Locator {
     return this.page.getByRole("button", { name: "Add" });
   }
+  get secondDeleteButton(): Locator {
+    return this.page.locator("i.oxd-icon.bi-trash").nth(1);
+  }
+  get confirmDeleteButton(): Locator {
+    return this.page.getByRole("button", { name: "Yes, Delete" });
+  }
 }

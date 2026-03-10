@@ -12,6 +12,7 @@ import {
 } from "../../utilities/utils/leave/topBar";
 import {
   createNewLeaveType,
+  deleteLeaveType,
   leaveTypeText,
 } from "../../utilities/utils/leaveType/leaveTypeUtil";
 import {
@@ -44,4 +45,6 @@ export async function createLeaveType(loggedInPage: Page) {
     "Leave Type Text",
     5000,
   );
+
+  await deleteLeaveType(loggedInPage, leaveTypePage);
 }

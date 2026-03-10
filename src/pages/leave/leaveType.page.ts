@@ -12,4 +12,6 @@ export class LeaveTypePage extends BasePage {
   get leaveTypeText(): Locator {
     return this.page.getByText(leaveTypeText, { exact: true });
   }
+
+  
 }
