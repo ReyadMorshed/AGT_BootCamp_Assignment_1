@@ -40,8 +40,39 @@ export async function deleteLeaveType(
     "Second Delete Button",
     page,
   );
-  await performClick(leaveTypePage.confirmDeleteButton, "Confirm Delete Button", page);
+  await performClick(
+    leaveTypePage.confirmDeleteButton,
+    "Confirm Delete Button",
+    page,
+  );
 
+  // Wait for 5 seconds (5000 milliseconds)
+  await page.waitForTimeout(5000);
+}
+
+export async function editLeaveType(
+  page: Page,
+  leaveTypePage: LeaveTypePage,
+  configureLeaveType: ConfigureLeaveTypePage,
+) {
+  leaveTypePage = new LeaveTypePage(page);
+  await performClick(
+    leaveTypePage.secondLeaveEditButton,
+    "Second Edit Button",
+    page,
+  );
+  await performClick(
+    configureLeaveType.leaveTypeNameInput,
+    "Leave Type Name Input",
+    page,
+  );
+  await performFill(
+    configureLeaveType.leaveTypeNameInput,
+    `${leaveTypeText}_Edited`,
+    "Leave Type Name Input",
+    page,
+  );
+  await clickOnSaveButton(page, leaveTypePage);
   // Wait for 5 seconds (5000 milliseconds)
   await page.waitForTimeout(5000);
 }

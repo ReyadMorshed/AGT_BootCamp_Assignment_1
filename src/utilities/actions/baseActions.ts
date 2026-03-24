@@ -2,6 +2,7 @@ import { Locator, Page } from "@playwright/test";
 import { MyLeavePage } from "../../pages/leave/myLeave.page";
 import { performClick } from "./elementActions";
 import { ApplyLeavePage } from "../../pages/leave/applyLeave.page";
+//import { BasePage } from "../../pages/base/base.page";
 import { BasePage } from "../../pages/Base/base.page";
 
 export async function clickOnSaveButton(
@@ -32,4 +33,8 @@ export async function clickOnAddButton(
 ): Promise<void> {
   // Implementation goes here
   await performClick(basePage.addButton, "Add Button", page);
+}
+
+export async function scrollToElement(page: Page, element: Locator): Promise<void> {
+  await element.scrollIntoViewIfNeeded();
 }

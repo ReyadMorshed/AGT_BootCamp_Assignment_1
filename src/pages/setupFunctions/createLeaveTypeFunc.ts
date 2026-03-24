@@ -2,6 +2,7 @@ import { Page, expect } from "@playwright/test";
 import { DashboardPage } from "../../pages/Dashboard/dashboard.page";
 
 import { Topbar } from "../../pages/leave/topbar.page";
+//import { BasePage } from "../base/base.page";
 import { BasePage } from "../../pages/Base/base.page";
 import { ConfigureLeaveTypePage } from "../leave/configureLeaveType.page";
 import { navigateToLeave } from "../../utilities/utils/dashboard/dashboardUtils";
@@ -45,6 +46,4 @@ export async function createLeaveType(loggedInPage: Page) {
     "Leave Type Text",
     5000,
   );
-
-  await deleteLeaveType(loggedInPage, leaveTypePage);
 }

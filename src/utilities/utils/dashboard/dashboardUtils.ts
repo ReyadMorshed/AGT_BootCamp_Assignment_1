@@ -8,3 +8,11 @@ export async function navigateToLeave(
   dashboard = new DashboardPage(page);
   await performClick(dashboard.LeaveLink, "Leave Link", page);
 }
+
+export async function navigateToEmployee(
+  page: Page,
+  dashboard: DashboardPage,
+): Promise<void> {
+  dashboard = new DashboardPage(page);
+  await performClick(dashboard.employeeLink, "Employee Link", page);
+}

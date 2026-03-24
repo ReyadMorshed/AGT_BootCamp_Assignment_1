@@ -5,7 +5,7 @@ import { Topbar } from "../../src/pages/leave/topbar.page";
 import { createLeaveType } from "../../src/pages/setupFunctions/createLeaveTypeFunc";
 import { deleteLeaveType } from "../../src/utilities/utils/leaveType/leaveTypeUtil";
 test.describe("Leave Type Tests", () => {
-  test("Create Leave Type", async ({ loggedInPage }) => {
+  test("Delete Leave Type", async ({ loggedInPage }) => {
     await createLeaveType(loggedInPage);
     const leaveTypePage = new LeaveTypePage(loggedInPage);
     await deleteLeaveType(loggedInPage, leaveTypePage);

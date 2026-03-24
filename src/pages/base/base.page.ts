@@ -8,6 +8,9 @@ export class BasePage {
   get LeaveLink(): Locator {
     return this.page.getByRole("link", { name: "Leave" });
   }
+  get employeeLink(): Locator {
+    return this.page.getByRole("link", { name: "PIM" });
+  }
   get applyButton(): Locator {
     return this.page.getByRole("button", { name: "Apply" });
   }
@@ -23,6 +26,9 @@ export class BasePage {
   }
   get secondDeleteButton(): Locator {
     return this.page.locator("i.oxd-icon.bi-trash").nth(1);
+  }
+  get deleteButton(): Locator {
+    return this.page.locator("i.oxd-icon.bi-trash");
   }
   get confirmDeleteButton(): Locator {
     return this.page.getByRole("button", { name: "Yes, Delete" });

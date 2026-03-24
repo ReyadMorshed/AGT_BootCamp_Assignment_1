@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
+//import { BasePage } from "../base/base.page";
 import { BasePage } from "../Base/base.page";
-
 export class ApplyLeavePage extends BasePage {
   protected page: Page;
   constructor(page: Page) {
