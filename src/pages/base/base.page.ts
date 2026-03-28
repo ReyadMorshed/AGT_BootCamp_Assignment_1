@@ -28,7 +28,7 @@ export class BasePage {
     return this.page.locator("i.oxd-icon.bi-trash").nth(1);
   }
   get deleteButton(): Locator {
-    return this.page.locator("i.oxd-icon.bi-trash");
+    return this.page.locator("i.oxd-icon.bi-trash").nth(0);
   }
   get confirmDeleteButton(): Locator {
     return this.page.getByRole("button", { name: "Yes, Delete" });

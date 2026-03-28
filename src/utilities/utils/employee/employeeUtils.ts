@@ -64,16 +64,46 @@ export async function deleteEmployee(
     page,
   );
   await scrollToElement(page, employeeListPage.deleteButton);
-  await performClick(
-    employeeListPage.deleteButton,
-    "Second Delete Button",
-    page,
-  );
+  await page.waitForTimeout(2000);
+  await performClick(employeeListPage.deleteButton, "Delete Button", page);
   await performClick(
     employeeListPage.confirmDeleteButton,
     "Confirm Delete Button",
     page,
   );
   // Wait for 5 seconds (5000 milliseconds)
+  //await page.waitForTimeout(5000);
+}
+
+export async function editEmployee(
+  page: Page,
+  employeeListPage: EmployeeListPage,
+  employeeTopbarPage: EmployeeTopbarPage,
+  addEmployeePage: AddEmployeePage,
+) {
+  // await performClick(
+  //   employeeTopbarPage.employeeListLink,
+  //   "Go to Employee List Link",
+  //   page,
+  // );
+  // await scrollToElement(page, employeeListPage.employeeEdiitButton);
+  //await performClick(employeeListPage.employeeEdiitButton, "Edit Button", page);
+  await performClick(
+    addEmployeePage.emplyeeFirstNameInput,
+
+    "First Name Input",
+    page,
+  );
+  await performFill(
+    addEmployeePage.emplyeeFirstNameInput,
+    `${employeeName}_Edited`,
+    "First Name Input",
+    page,
+  );
+  await clickOnSaveButton(page, addEmployeePage);
+  // Wait for 5 seconds (5000 milliseconds)
+  // Refresh the current page
+  await page.reload();
+
   await page.waitForTimeout(5000);
 }

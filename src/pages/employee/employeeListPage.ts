@@ -11,4 +11,8 @@ export class EmployeeListPage extends BasePage {
   get employeeNameText(): Locator {
     return this.page.getByText(employeeName, { exact: false });
   }
+
+  get employeeEdiitButton(): Locator {
+    return this.page.locator("(//i[@class='oxd-icon bi-pencil-fill'])[1]");
+  }
 }
