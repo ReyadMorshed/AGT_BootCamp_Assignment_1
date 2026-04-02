@@ -154,3 +154,26 @@ export async function validatePartialPresenceOfText(
     throw error;
   }
 }
+
+/**
+ * Validates that the expected text is NOT present anywhere within the given locator (defaults to page body).
+ * * @param locator - The Playwright Locator to search within (e.g., page.locator('body'))
+ * @param forbiddenText - The text that should NOT be found
+ * @param description - Context for logging
+ * @param timeout - Maximum time to wait for the text to disappear or stay absent
+ */
+export async function validateAbsenceOfText(
+  locator: Locator,
+  description: string,
+  timeout: number = 10000,
+): Promise<void> {
+  try {
+    // toBeHidden passes if the element is NOT in the DOM or is hidden
+    await expect(locator).toBeHidden({ timeout });
+
+    console.log(`SUCCESS: ${description} is no longer visible/present.`);
+  } catch (error) {
+    console.error(`FAILURE: ${description} is still visible/present.`, error);
+    throw error;
+  }
+}
