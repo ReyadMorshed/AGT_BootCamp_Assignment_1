@@ -177,3 +177,28 @@ export async function validateAbsenceOfText(
     throw error;
   }
 }
+/**
+ * Validates that the element's text matches the expected string exactly.
+ * Note: Playwright's toHaveText ignores leading/trailing whitespace by default.
+ */
+export async function validateExactPresenceOfText(
+  locator: Locator,
+  expectedText: string,
+  description: string,
+  timeout: number = 10000,
+): Promise<void> {
+  try {
+    // .toHaveText(string) performs an exact match of the text content
+    await expect(locator).toHaveText(expectedText, { timeout });
+
+    console.log(
+      `SUCCESS: ${description} exactly matches expected text '${expectedText}'`,
+    );
+  } catch (error) {
+    console.error(
+      `FAILURE: ${description} does not exactly match expected text '${expectedText}'.`,
+      error,
+    );
+    throw error;
+  }
+}

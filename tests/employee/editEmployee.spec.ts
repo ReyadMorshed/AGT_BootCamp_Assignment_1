@@ -11,6 +11,7 @@ import {
 } from "../../src/utilities/utils/employee/employeeUtils";
 import { EmployeeTopbarPage } from "../../src/pages/employee/employeeTopbarPage";
 import { AddEmployeePage } from "../../src/pages/employee/addEmployeePage";
+import { editEvent } from "../../src/utilities/utils/claimEvents/eventUtils";
 
 test.describe("Employee Tests", () => {
   test("Edit Employee", async ({ loggedInPage }) => {

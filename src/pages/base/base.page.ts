@@ -11,6 +11,9 @@ export class BasePage {
   get employeeLink(): Locator {
     return this.page.getByRole("link", { name: "PIM" });
   }
+  get ClaimLink(): Locator {
+    return this.page.getByRole("link", { name: "Claim" });
+  }
   get applyButton(): Locator {
     return this.page.getByRole("button", { name: "Apply" });
   }

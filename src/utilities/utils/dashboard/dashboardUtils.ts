@@ -16,3 +16,11 @@ export async function navigateToEmployee(
   dashboard = new DashboardPage(page);
   await performClick(dashboard.employeeLink, "Employee Link", page);
 }
+
+export async function navigateToClaim(
+  page: Page,
+  dashboard: DashboardPage,
+): Promise<void> {
+  dashboard = new DashboardPage(page);
+  await performClick(dashboard.ClaimLink, "Claim Link", page);
+}
