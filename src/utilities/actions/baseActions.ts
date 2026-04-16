@@ -38,3 +38,7 @@ export async function clickOnAddButton(
 export async function scrollToElement(page: Page, element: Locator): Promise<void> {
   await element.scrollIntoViewIfNeeded();
 }
+
+export async function waitfortimeout(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}

@@ -1,4 +1,5 @@
 import { expect, Page } from "@playwright/test";
+import { test } from "../../fixture/pomFixture";
 import { BasePage } from "../Base/base.page";
 import { DashboardPage } from "../Dashboard/dashboard.page";
 import { navigateToClaim } from "../../utilities/utils/dashboard/dashboardUtils";
@@ -16,6 +17,7 @@ import {
 import { EventListPage } from "../claimEvent/eventList.page";
 import { ClaimListPage } from "../claimEvent/claimList.page";
 import { SubmitClaimPage } from "../claimEvent/submitClaim.page";
+import { waitfortimeout } from "../../utilities/actions/baseActions";
 
 export async function createClaim(
     loggedInPage: Page,
@@ -25,10 +27,6 @@ export async function createClaim(
     claimListPage: ClaimListPage,
     submitClaimPage: SubmitClaimPage,
 ) {
-    // Implement the logic to create an event using the loggedInPage
-
-    // await expect(dashboardPage.dashboardText).toBeVisible({ timeout: 5000 });
-    // await expect(dashboardPage.timeAtWorkText).toBeVisible({ timeout: 5000 });
     await navigateToClaim(loggedInPage, dashboardPage);
     // This may involve navigating to the event creation page, filling out forms, and submitting them
     await createNewEvent(loggedInPage, claimEventTopbarPage, saveEventPage);
@@ -39,6 +37,41 @@ export async function createClaim(
     );
     await claimListPage.submitClaimButton.waitFor({
         state: "visible",
+        timeout: 5000,
+    });
+    await performClick(
+        claimListPage.submitClaimButton,
+        "Submit Claim Button",
+        loggedInPage,
+    );
+    await submitClaimPage.eventMenu.waitFor({
+        state: "visible",
+        timeout: 5000,
+    });
+    await performClick(submitClaimPage.eventMenu, "Event Menu", loggedInPage);
+    await performClick(
+        submitClaimPage.eventOption,
+        "Event Option",
+        loggedInPage,
+    );
+    await performClick(
+        submitClaimPage.currencyMenu,
+        "Currency Menu",
+        loggedInPage,
+    );
+    await performClick(
+        submitClaimPage.currencyOption,
+        "Currency Option",
+        loggedInPage,
+    );
+
+    await performClick(
+        submitClaimPage.createButton,
+        "Create Button",
+        loggedInPage,
+    );
+    await waitfortimeout(5000);
+    await expect(submitClaimPage.referenceIdTitle).toBeVisible({
         timeout: 5000,
     });
 }

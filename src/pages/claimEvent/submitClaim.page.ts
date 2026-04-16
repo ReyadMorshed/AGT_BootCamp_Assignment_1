@@ -6,12 +6,6 @@ export class SubmitClaimPage extends BasePage {
         super(page);
     }
 
-    // get eventMenu(): Locator {
-    //     return this.page.locator(
-    //         "body > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > form:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > i:nth-child(1)",
-    //     );
-    // }
-
     get eventMenu(): Locator {
         return this.page
             .locator(".oxd-input-group")
@@ -19,6 +13,9 @@ export class SubmitClaimPage extends BasePage {
                 has: this.page.locator(".oxd-label", { hasText: "Event" }),
             })
             .locator(".oxd-select-text");
+    }
+    get eventOption(): Locator {
+        return this.page.locator("//div[@role='listbox']//div[2]");
     }
 
     get currencyMenu(): Locator {
@@ -32,6 +29,9 @@ export class SubmitClaimPage extends BasePage {
     get currencyOption(): Locator {
         return this.page.locator("//div[@role='listbox']//div[2]");
     }
+
+    get referenceIdTitle(): Locator {
+        return this.page.getByText("Reference Id", { exact: true });
+    }
 }
 //page.getByText('Event_1775157687720', { exact: true })
-
